@@ -153,6 +153,8 @@ input[type=search]{flex:1;min-width:220px;background:var(--paper);color:var(--in
 .lgi{display:none;width:66%;max-height:72%;object-fit:contain;background:var(--paper);padding:10px;position:relative;z-index:2}
 .lgw.has .lgi{display:block}.lgw.has svg{display:none}
 .bp .lgw svg,.box .bp .lgw svg{width:50%}
+.lgw.gif{position:absolute;inset:0;width:100%;height:100%;display:block}
+.lgw.gif .lgi{width:100%;height:100%;max-height:none;padding:0;object-fit:cover;background:none}
 footer{background:#000;border-top:6px solid var(--red);padding:34px 0;font:.88rem var(--tw);color:#aaa}
 footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 @media(prefers-reduced-motion:reduce){.tk,.smoke i{animation:none!important}html{scroll-behavior:auto}}
@@ -306,7 +308,7 @@ function badge(b){const n=b.n;let g;
  else{const w=n.replace(/&/g,'').split(/[\s.]+/).filter(Boolean),m=(w[0][0]+(w[1]?w[1][0]:w[0][1]||'')).toUpperCase();g=`<path d="M50 6L90 20V50Q90 80 50 95Q10 80 10 50V20Z" fill="none" stroke="currentColor" stroke-width="5"/><text x="50" y="62" text-anchor="middle" font-family="Anton,Impact" font-size="34" fill="currentColor">${esc(m)}</text>`}
  return `<svg viewBox="0 0 100 100" role="img" aria-label="Ilustrasi badge ${esc(n)}">${g}</svg>`}
 const slug=n=>n.toLowerCase().replace(/&/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-function bimg(b){const f=slug(b.n);return `<span class="lgw">${badge(b)}<img class="lgi" src="logos/${f}.svg" alt="Logo ${esc(b.n)}" onload="this.parentNode.classList.add('has')" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logos/${f}.png'}else this.remove()"></span>`}
+function bimg(b){const f=slug(b.n);return `<span class="lgw">${badge(b)}<img class="lgi" src="logos/${f}.gif" data-f="${f}" data-i="0" alt="Logo ${esc(b.n)}" onload="var p=this.parentNode;p.classList.add('has');if(this.src.slice(-4)=='.gif')p.classList.add('gif')" onerror="var e=['svg','png','jpg'],i=+this.dataset.i;if(i<e.length){this.dataset.i=i+1;this.src='logos/'+this.dataset.f+'.'+e[i]}else this.remove()"></span>`}
 const CC={"Italian Sportswear":"c1","Designer Outerwear":"c2","Classic Trainers":"c3","UK Modern":"c4"};
 // anatomi
 const FITS=[["Goggle Jacket","C.P. Company","Jaket dengan lensa goggle di tudung, terinspirasi helm balap Mille Miglia. Simbol paling dikenal dari scene ini.","pic:jacket"],["Compass Badge","Stone Island","Patch kompas di lengan, dilepas lewat kancing. Penanda kualitas bahan dan eksperimen pewarnaan.","badge:Stone Island"],["Suede Trainers","Adidas SPZL","Gazelle, Samba, Handball Spezial. Suede, sol gum, siluet ramping, dan titik pusat outfit.","pic:sneaker"],["Trench Coat","Burberry / Aquascutum","Mantel panjang untuk gaya smart casual tribun 90-an, kini dipakai ringan di atas polo.","pic:trench"],["Bucket Hat","Gaya Britpop","Topi bucket jadi penutup kepala khas akhir 80-an sampai 90-an, ringan dan cocok di cuaca panas.","pic:hat"],["Syal Klub","Atribut tribun","Syal tetap simbol identitas suporter, sering dipakai di bahu atau diikat di tas.","pic:scarf"]];
