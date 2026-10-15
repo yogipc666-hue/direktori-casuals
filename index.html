@@ -148,6 +148,11 @@ input[type=search]{flex:1;min-width:220px;background:var(--paper);color:var(--in
 .x{position:absolute;right:8px;top:2px;z-index:5;background:var(--ink);color:#fff;border:0;width:34px;height:34px;font-size:1.6rem;line-height:1}
 .price{width:100%;border-collapse:collapse}.price td{border-bottom:1px dashed #999;padding:6px 0}.price td:last-child{text-align:right;font-weight:800;white-space:nowrap}
 .mb .tips{background:#fff;border:3px dashed var(--red);padding:10px 12px;font-size:.93rem}
+.lgw{position:relative;z-index:1;display:grid;place-items:center;width:100%;height:100%}
+.lgw svg{width:50%;height:auto}
+.lgi{display:none;width:66%;max-height:72%;object-fit:contain;background:var(--paper);padding:10px;position:relative;z-index:2}
+.lgw.has .lgi{display:block}.lgw.has svg{display:none}
+.bp .lgw svg,.box .bp .lgw svg{width:50%}
 footer{background:#000;border-top:6px solid var(--red);padding:34px 0;font:.88rem var(--tw);color:#aaa}
 footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 @media(prefers-reduced-motion:reduce){.tk,.smoke i{animation:none!important}html{scroll-behavior:auto}}
@@ -165,11 +170,11 @@ footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 <section class="hero" id="top">
 <img id="himg" alt="" onerror="this.remove()">
 <div class="smoke" aria-hidden="true"><i></i><i></i><i></i></div>
-<div class="stk">Away Days<br>since 1977</div><div class="stk b">Zine<br>Edisi 01</div>
+<div class="stk">Away Days<br>sejak 1977</div><div class="stk b">Zine<br>Edisi 01</div>
 <div class="wrap hc">
 <span class="stamp">Terrace Culture &amp; Football Subculture Guide</span>
 <h1><span>Direktori</span><span class="r">Casuals</span></h1>
-<p class="sub">Bukan cuma soal gaya, ini sejarah tribun. Pahami sejarahnya, atau lepas bajumu!</p>
+<p class="sub">Fanzine Bahasa Indonesia tentang pakaian, tribun, dan sejarah suporter yang berpakaian rapi. Baca dulu, baru belanja.</p>
 <div><a class="btn" href="#apa">Mulai baca</a><a class="btn alt" href="#brand">Buka direktori brand</a></div>
 </div>
 <div class="zz"></div>
@@ -239,7 +244,7 @@ footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 <li>Minta foto label dalam, tag, badge, dan kotak.</li><li>Cocokkan kode produk dengan situs resmi brand.</li><li>Periksa jahitan, zipper, dan kancing.</li><li>Harga jauh di bawah pasar hampir selalu berarti masalah.</li><li>Pakai pembayaran terlindungi (rekber / escrow marketplace).</li><li>Beli luar negeri: hitung ongkir dan bea masuk dulu.</li></ol></div>
 </div></section>
 
-<footer><div class="wrap"><b>Direktori Casuals by Yogic</b>Fanzine edukasi independen, dibuat untuk projek sekolah. Semua nama brand adalah milik pemiliknya masing-masing, dan situs ini tidak berafiliasi dengan brand atau toko mana pun. Foto dari Unsplash, hak cipta milik fotografernya.</div></footer>
+<footer><div class="wrap"><b>Direktori Casuals</b>Fanzine edukasi independen, dibuat untuk projek sekolah. Semua nama brand adalah milik pemiliknya masing-masing, dan situs ini tidak berafiliasi dengan brand atau toko mana pun. Foto dari Unsplash, hak cipta milik fotografernya.</div></footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="box"><button class="x" id="mx" aria-label="Tutup">&times;</button><div id="mc" style="display:contents"></div></div></div>
 
@@ -281,9 +286,9 @@ const IMG={
  pub:{u:'',c:'Pub sebelum pertandingan'},fabric:{u:'',c:'Detail kain: nylon, cotton, gore-tex'},vintage:{u:'',c:'Suporter 80-an, away day'}
 };
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function pic(k,cls){const m=IMG[k];return `<figure class="ph ${cls||''}${m.u?'':' fail'}">${m.u?`<img src="${m.u}" alt="${esc(m.c)}" loading="lazy" onerror="this.parentNode.classList.add('fail')">`:''}<span class="fb">${esc(m.c)}</span><figcaption>${esc(m.c)}</figcaption></figure>`}
+function pic(k,cls){const m=IMG[k];return `<figure class="ph ${cls||''}"><img src="img/${k}.jpg" data-alt="${m.u||''}" alt="${esc(m.c)}" loading="lazy" onerror="if(this.dataset.alt&&!this.dataset.t){this.dataset.t=1;this.src=this.dataset.alt}else this.parentNode.classList.add('fail')"><span class="fb">${esc(m.c)}</span><figcaption>${esc(m.c)}</figcaption></figure>`}
 function fill(root){(root||document).querySelectorAll('[data-pic]').forEach(e=>{const[k,c]=e.dataset.pic.split('|');e.outerHTML=pic(k,c)})}
-if(IMG.hero.u)$('#himg').src=IMG.hero.u;else $('#himg').remove();
+const hi=$('#himg');hi.dataset.alt=IMG.hero.u||'';hi.onerror=function(){if(this.dataset.alt&&!this.dataset.t){this.dataset.t=1;this.src=this.dataset.alt}else this.remove()};hi.src='img/hero.jpg';
 // ticker (teks contoh)
 const TK=["Matchday fit: polo + harrington + trainer suede","Restock watch: pantau rilis Adidas SPZL di toko resmi","“Clobber bukan kostum, itu bahasa.”","Away days: bawa kaos ganti, pulang jangan lupa tiket","Cek keaslian: selalu minta foto label dalam","“Trainer adalah titik pusat outfit.”","Zine edisi 01: sejarah, brand, glosarium, store"];
 const tkh=TK.map(t=>`<span>★ ${esc(t)} &nbsp;</span>`).join('');$('#tk').innerHTML=tkh+tkh;
@@ -300,6 +305,8 @@ function badge(b){const n=b.n;let g;
  else if(n==='Burberry')g='<rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" stroke-width="4"/><g stroke="currentColor"><path d="M30 10v80M50 10v80M70 10v80M10 30h80M10 50h80M10 70h80" stroke-width="2.5" opacity=".7"/><path d="M40 10v80M10 40h80" stroke-width="6" opacity=".9"/></g>';
  else{const w=n.replace(/&/g,'').split(/[\s.]+/).filter(Boolean),m=(w[0][0]+(w[1]?w[1][0]:w[0][1]||'')).toUpperCase();g=`<path d="M50 6L90 20V50Q90 80 50 95Q10 80 10 50V20Z" fill="none" stroke="currentColor" stroke-width="5"/><text x="50" y="62" text-anchor="middle" font-family="Anton,Impact" font-size="34" fill="currentColor">${esc(m)}</text>`}
  return `<svg viewBox="0 0 100 100" role="img" aria-label="Ilustrasi badge ${esc(n)}">${g}</svg>`}
+const slug=n=>n.toLowerCase().replace(/&/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+function bimg(b){const f=slug(b.n);return `<span class="lgw">${badge(b)}<img class="lgi" src="logos/${f}.svg" alt="Logo ${esc(b.n)}" onload="this.parentNode.classList.add('has')" onerror="if(!this.dataset.t){this.dataset.t=1;this.src='logos/${f}.png'}else this.remove()"></span>`}
 const CC={"Italian Sportswear":"c1","Designer Outerwear":"c2","Classic Trainers":"c3","UK Modern":"c4"};
 // anatomi
 const FITS=[["Goggle Jacket","C.P. Company","Jaket dengan lensa goggle di tudung, terinspirasi helm balap Mille Miglia. Simbol paling dikenal dari scene ini.","pic:jacket"],["Compass Badge","Stone Island","Patch kompas di lengan, dilepas lewat kancing. Penanda kualitas bahan dan eksperimen pewarnaan.","badge:Stone Island"],["Suede Trainers","Adidas SPZL","Gazelle, Samba, Handball Spezial. Suede, sol gum, siluet ramping, dan titik pusat outfit.","pic:sneaker"],["Trench Coat","Burberry / Aquascutum","Mantel panjang untuk gaya smart casual tribun 90-an, kini dipakai ringan di atas polo.","pic:trench"],["Bucket Hat","Gaya Britpop","Topi bucket jadi penutup kepala khas akhir 80-an sampai 90-an, ringan dan cocok di cuaca panas.","pic:hat"],["Syal Klub","Atribut tribun","Syal tetap simbol identitas suporter, sering dipakai di bahu atau diikat di tas.","pic:scarf"]];
@@ -320,7 +327,7 @@ function render(){
  $('#az').innerHTML=`<button class="${letter?'':'on'}" data-l="">Semua</button>`+[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].map(l=>`<button class="${l===letter?'on':''}" data-l="${l}" ${letters.includes(l)?'':'disabled'}>${l}</button>`).join('');
  $('#az').querySelectorAll('button:not(:disabled)').forEach(b=>b.onclick=()=>{letter=b.dataset.l;render()});
  const q=query.toLowerCase(),list=BRANDS.filter(b=>(cat==="Semua"||b.c===cat)&&(!letter||b.n[0].toUpperCase()===letter)&&(!q||(b.n+b.h+b.i.join(' ')+b.c+b.o).toLowerCase().includes(q)));
- $('#brands').innerHTML=list.map(b=>`<button class="bc" data-n="${esc(b.n)}"><span class="bp ${CC[b.c]}">${badge(b)}</span><span class="tg">${esc(b.c)}</span><h3>${esc(b.n)}</h3><span class="mt">${esc(b.o)} · sejak ${esc(b.y)}</span><span class="pr">mulai ${esc(b.p[0][1])}</span></button>`).join('');
+ $('#brands').innerHTML=list.map(b=>`<button class="bc" data-n="${esc(b.n)}"><span class="bp ${CC[b.c]}">${bimg(b)}</span><span class="tg">${esc(b.c)}</span><h3>${esc(b.n)}</h3><span class="mt">${esc(b.o)} · sejak ${esc(b.y)}</span><span class="pr">mulai ${esc(b.p[0][1])}</span></button>`).join('');
  $('#none').hidden=list.length>0;
  $('#brands').querySelectorAll('.bc').forEach(el=>el.onclick=()=>openB(el.dataset.n));
 }
@@ -331,7 +338,7 @@ const TB={"Stone Island":"Badge kompas harus rapi dan kancingnya kuat; kode prod
 // modal
 let last;
 function openB(n){const b=BRANDS.find(x=>x.n===n);last=document.activeElement;
- $('#mc').innerHTML=`<div class="bp ${CC[b.c]}">${badge(b)}</div><div class="mb"><span class="kick">${esc(b.c)}</span><h3 id="mt">${esc(b.n)}</h3><p style="color:#555;margin:0">${esc(b.o)} · sejak ${esc(b.y)}</p>
+ $('#mc').innerHTML=`<div class="bp ${CC[b.c]}">${bimg(b)}</div><div class="mb"><span class="kick">${esc(b.c)}</span><h3 id="mt">${esc(b.n)}</h3><p style="color:#555;margin:0">${esc(b.o)} · sejak ${esc(b.y)}</p>
  <dl><dt>Sejarah &amp; peran di casuals</dt><dd>${esc(b.h)}</dd><dt>Item ikonik</dt><dd>${b.i.map(esc).join(', ')}</dd><dt>Kisaran harga di Indonesia (IDR)</dt><dd><table class="price">${b.p.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('')}</table></dd>
  <dt>Tips cek originality</dt><dd class="tips">${esc(TB[b.n]||TC[b.c])} ${TB[b.n]?esc(TC[b.c]):''}</dd></dl>
  <p style="font:.85rem var(--tw);color:#555;margin:14px 0 0">Harga adalah estimasi dan bukan harga resmi. Badge adalah ilustrasi, bukan logo resmi.</p></div>`;
