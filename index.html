@@ -67,6 +67,8 @@ p{margin-bottom:14px;max-width:68ch}
 .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:grayscale(1) contrast(1.25) brightness(.92)}
 .ph.col img{filter:contrast(1.1) saturate(.85)}.ph.old img{filter:sepia(.55) grayscale(.5) contrast(1.2)}
 .ph.duo{background:var(--red)}.ph.duo img{mix-blend-mode:multiply}
+.ph.sep img{filter:grayscale(1) sepia(.75) contrast(1.15) brightness(.95)}
+.ph.navy{background:#16264a}.ph.navy img{mix-blend-mode:multiply}
 .ph:after{content:"";position:absolute;inset:0;background:radial-gradient(#0004 1px,transparent 1.5px) 0 0/5px 5px;pointer-events:none}
 .ph .fb{display:none}
 .ph.fail{background:repeating-linear-gradient(135deg,#1a1a1a 0 12px,#222 12px 24px)}
@@ -245,7 +247,7 @@ footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 <li>Minta foto label dalam, tag, badge, dan kotak.</li><li>Cocokkan kode produk dengan situs resmi brand.</li><li>Periksa jahitan, zipper, dan kancing.</li><li>Harga jauh di bawah pasar hampir selalu berarti masalah.</li><li>Pakai pembayaran terlindungi (rekber / escrow marketplace).</li><li>Beli luar negeri: hitung ongkir dan bea masuk dulu.</li></ol></div>
 </div></section>
 
-<footer><div class="wrap"><b>Direktori Casuals by Yogic</b>Fanzine edukasi independen, dibuat untuk projek sekolah. Semua nama brand adalah milik pemiliknya masing-masing, dan situs ini tidak berafiliasi dengan brand atau toko mana pun. Foto dari Unsplash, hak cipta milik fotografernya.<br><span style="display:block;margin-top:10px">Kontak: <a href="mailto:cheifyogik@gmail.com" style="color:var(--paper);text-decoration:underline">cheifyogik@gmail.com</a></span></div></footer>
+<footer><div class="wrap"><b>Direktori Casuals by Yogic</b>Fanzine edukasi independen, dibuat untuk projek sekolah. Semua nama brand adalah milik pemiliknya masing-masing, dan situs ini tidak berafiliasi dengan brand atau toko mana pun.<br><span style="display:block;margin-top:10px">Kontak: <a href="mailto:cheifyogik@gmail.com" style="color:var(--paper);text-decoration:underline">cheifyogik@gmail.com</a></span></div></footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="box"><button class="x" id="mx" aria-label="Tutup">&times;</button><div id="mc" style="display:contents"></div></div></div>
 
@@ -272,17 +274,16 @@ const BRANDS=[
 ];
 const GLOSS=[["Away Days","Perjalanan mendukung klub ke luar kandang. Selain pertandingan, jadi momen menunjukkan pakaian dan bertemu teman."],["Clobber","Slang untuk pakaian. 'Good clobber' berarti pakaian bagus dan bermerek."],["Trainer Heads","Orang yang sangat fokus pada sepatu, terutama trainer Adidas dan model langka."],["Firm","Istilah sejarah untuk kelompok suporter informal, kadang terkait kekerasan. Disebut hanya sebagai konteks budaya."],["Terraces","Area berdiri di tribun murah stadion Inggris sebelum all-seater. Pusat budaya suporter."],["Casual","Orang atau gaya berpakaian berakar tribun, memakai brand olahraga atau desainer."],["Labels","Merek. 'Wearing labels' berarti memakai brand terkenal."],["Wedge","Potongan rambut awal 80-an: tebal di atas, pendek di samping."],["Dressers","Sebutan awal bagi suporter yang berpakaian rapi dan bermerek."],["Paninari","Subkultur anak muda Milan 80-an yang mengagumi brand dan memengaruhi mode tribun."],["Spezial","Model Adidas berfokus olahraga indoor yang kini jadi koleksi kolektor."],["Mille Miglia","Jaket C.P. Company yang terinspirasi balapan Italia, dikenal sebagai jaket goggle."],["Badge","Patch brand di lengan, terutama Stone Island."],["Archive","Barang musim lampau yang dicari kolektor."],["Tifo","Koreografi besar di tribun. Lebih terkait ultras daripada casuals."],["Ultras","Kelompok pendukung fanatik terorganisir asal Italia. Fokus pada dukungan, bukan fashion."],["Hooligan","Pelaku kerusuhan terkait sepak bola. Berbeda dari casuals sebagai gaya berpakaian."],["Gazelle","Trainer Adidas suede ramping, populer di tribun sejak 80-an."],["Matchday","Hari pertandingan; juga outfit yang dikenakan untuk hari itu."]];
 // ====== FOTO: ganti URL di sini (kosongkan u untuk memakai kotak placeholder) ======
-const U=(id,w=900)=>`https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=${w}&q=70`;
 const IMG={
- hero:{u:U('1508098682722-e99c43a406b2',1600),c:'Tribun riuh, asap flare merah'},
- crowd:{u:U('1522778119026-d647f0596c20'),c:'Away day: tribun tandang'},
- stadium:{u:U('1489944440615-453fc2b6a9a9'),c:'Stadion sebelum kick-off'},
- pitch:{u:U('1431324155629-1a6deb1dec8d'),c:'Matchday, rumput basah'},
- jacket:{u:U('1551028719-00167b16eac5'),c:'Goggle jacket'},
- sneaker:{u:U('1542291026-7eec264c27ff'),c:'Suede trainers'},
- sneaker2:{u:U('1491553895911-0055eca6402d'),c:'Trainer sol gum'},
- sneaker3:{u:U('1556906781-9a412961c28c'),c:'Detail trainer'},
- rack:{u:U('1523381210434-271e8be1f52b'),c:'Rak clobber'},
+ hero:{u:'',c:'Tribun riuh, asap flare merah'},
+ crowd:{u:'',c:'Away day: tribun tandang'},
+ stadium:{u:'',c:'Stadion sebelum kick-off'},
+ pitch:{u:'',c:'1312 forever'},
+ jacket:{u:'',c:'Goggle jacket'},
+ sneaker:{u:'',c:'Suede trainers'},
+ sneaker2:{u:'',c:'Trainer sol gum'},
+ sneaker3:{u:'',c:'Detail trainer'},
+ rack:{u:'',c:'Rak clobber'},
  trench:{u:'',c:'Trench coat'},hat:{u:'',c:'Bucket hat'},scarf:{u:'',c:'Syal klub'},
  pub:{u:'',c:'Pub sebelum pertandingan'},fabric:{u:'',c:'Detail kain: nylon, cotton, gore-tex'},vintage:{u:'',c:'No one likes us, we dont care'}
 };
@@ -313,7 +314,7 @@ function bimg(b){const f=slug(b.n);return `<span class="lgw">${badge(b)}<img cla
 const CC={"Italian Sportswear":"c1","Designer Outerwear":"c2","Classic Trainers":"c3","UK Modern":"c4"};
 // anatomi
 const FITS=[["Goggle Jacket","C.P. Company","Jaket dengan lensa goggle di tudung, terinspirasi helm balap Mille Miglia. Simbol paling dikenal dari scene ini.","pic:jacket"],["Compass Badge","Stone Island","Patch kompas di lengan, dilepas lewat kancing. Penanda kualitas bahan dan eksperimen pewarnaan.","badge:Stone Island"],["Suede Trainers","Adidas SPZL","Gazelle, Samba, Handball Spezial. Suede, sol gum, siluet ramping, dan titik pusat outfit.","pic:sneaker"],["Trench Coat","Burberry / Aquascutum","Mantel panjang untuk gaya smart casual tribun 90-an, kini dipakai ringan di atas polo.","pic:trench"],["Bucket Hat","Gaya Britpop","Topi bucket jadi penutup kepala khas akhir 80-an sampai 90-an, ringan dan cocok di cuaca panas.","pic:hat"],["Syal Klub","Atribut tribun","Syal tetap simbol identitas suporter, sering dipakai di bahu atau diikat di tas.","pic:scarf"]];
-$('#fits').innerHTML=FITS.map((f,i)=>{const[t,k]=f[3].split(':');const v=t==='pic'?`<div class="pol t${i%3+1}">${pic(k,'cap '+(i%2?'duo':''))}</div>`:`<div class="pol t${i%3+1}"><div class="bpz">${badge({n:k})}</div></div>`;return `<article class="fit" style="color:var(--ink)">${v}<h3 style="color:var(--paper)">${f[0]}</h3><p style="color:#ddd">${f[2]}</p><span class="tag">${esc(f[1])}</span></article>`}).join('');
+$('#fits').innerHTML=FITS.map((f,i)=>{const[t,k]=f[3].split(':');const v=t==='pic'?`<div class="pol t${i%3+1}">${pic(k,'cap '+(i%2?'sep':''))}</div>`:`<div class="pol t${i%3+1}"><div class="bpz">${badge({n:k})}</div></div>`;return `<article class="fit" style="color:var(--ink)">${v}<h3 style="color:var(--paper)">${f[0]}</h3><p style="color:#ddd">${f[2]}</p><span class="tag">${esc(f[1])}</span></article>`}).join('');
 // beda
 const CMP=[["Casuals",[["Gaya","Brand olahraga dan desainer Eropa, rapi, sulit didapat."],["Atribut","Trainer, polo, jaket teknis, badge brand."],["Budaya","Fashion dan koleksi; banyak yang hanya peduli gaya."],["Asal","Inggris, akhir 1970-an."]]],["Ultras",[["Gaya","Atribut klub: syal, kaos, bendera, bomber."],["Atribut","Tifo, drum, banner, koreo."],["Budaya","Dukungan terorganisir, loyal, kadang politis."],["Asal","Italia, 1950–60-an."]]],["Hooligans",[["Gaya","Bukan gaya, melainkan label perilaku."],["Atribut","Tidak ada seragam; sebagian meminjam gaya casuals."],["Budaya","Kekerasan terkait sepak bola, melanggar hukum."],["Catatan","Bukan hal yang dirayakan situs ini."]]]];
 $('#cmp').innerHTML=CMP.map(c=>`<article class="cm"><h3>${c[0]}</h3><dl>${c[1].map(r=>`<dt>${r[0]}</dt><dd>${r[1]}</dd>`).join('')}</dl></article>`).join('');
