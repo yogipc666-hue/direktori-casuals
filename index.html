@@ -224,7 +224,7 @@ footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 
 <section class="paper pad" id="brand"><div class="wrap">
 <span class="kick">Bab 5 — Direktori</span><h2 class="zh">Direktori Brand A–Z</h2>
-<p>Ketuk kartu untuk sejarah, item ikonik, kisaran harga (IDR), dan tips cek keaslian. Badge di kartu adalah ilustrasi orisinal, bukan logo resmi.</p>
+<p>Ketuk kartu untuk sejarah, item ikonik, kisaran harga (IDR), dan tips cek keaslian.</p>
 <div class="tools"><input type="search" id="q" placeholder="Cari brand, item, atau kata kunci…" aria-label="Cari brand"></div>
 <div class="chips" id="cats"></div><div class="az" id="az"></div>
 <div class="brands" id="brands"></div>
@@ -246,7 +246,7 @@ footer b{font:400 1.6rem var(--an);color:var(--paper);display:block}
 <li>Minta foto label dalam, tag, badge, dan kotak.</li><li>Cocokkan kode produk dengan situs resmi brand.</li><li>Periksa jahitan, zipper, dan kancing.</li><li>Harga jauh di bawah pasar hampir selalu berarti masalah.</li><li>Pakai pembayaran terlindungi (rekber / escrow marketplace).</li><li>Beli luar negeri: hitung ongkir dan bea masuk dulu.</li></ol></div>
 </div></section>
 
-<footer><div class="wrap"><b>Direktori Casuals by Yogic</b>Fanzine edukasi independen, dibuat untuk projek sekolah. Semua nama brand adalah milik pemiliknya masing-masing, dan situs ini tidak berafiliasi dengan brand atau toko mana pun. Foto dari Unsplash, hak cipta milik fotografernya.</div></footer>
+<footer><div class="wrap"><b>Direktori Casuals by Yogic</b>Fanzine edukasi independen, dibuat untuk projek sekolah. Semua nama brand adalah milik pemiliknya masing-masing, dan situs ini tidak berafiliasi dengan brand atau toko mana pun. Foto dari Unsplash, hak cipta milik fotografernya.<br><span style="display:block;margin-top:10px">Kontak: <a href="mailto:cheifyogik@gmail.com" style="color:var(--paper);text-decoration:underline">cheifyogik@gmail.com</a></span></div></footer>
 
 <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mt"><div class="box"><button class="x" id="mx" aria-label="Tutup">&times;</button><div id="mc" style="display:contents"></div></div></div>
 
@@ -343,7 +343,7 @@ function openB(n){const b=BRANDS.find(x=>x.n===n);last=document.activeElement;
  $('#mc').innerHTML=`<div class="bp ${CC[b.c]}">${bimg(b)}</div><div class="mb"><span class="kick">${esc(b.c)}</span><h3 id="mt">${esc(b.n)}</h3><p style="color:#555;margin:0">${esc(b.o)} · sejak ${esc(b.y)}</p>
  <dl><dt>Sejarah &amp; peran di casuals</dt><dd>${esc(b.h)}</dd><dt>Item ikonik</dt><dd>${b.i.map(esc).join(', ')}</dd><dt>Kisaran harga di Indonesia (IDR)</dt><dd><table class="price">${b.p.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('')}</table></dd>
  <dt>Tips cek originality</dt><dd class="tips">${esc(TB[b.n]||TC[b.c])} ${TB[b.n]?esc(TC[b.c]):''}</dd></dl>
- <p style="font:.85rem var(--tw);color:#555;margin:14px 0 0">Harga adalah estimasi dan bukan harga resmi. Badge adalah ilustrasi, bukan logo resmi.</p></div>`;
+ <p style="font:.85rem var(--tw);color:#555;margin:14px 0 0">Harga adalah estimasi dan bukan harga resmi.</p></div>`;
  $('#modal').classList.add('on');$('#mx').focus();document.body.style.overflow='hidden'}
 function closeM(){$('#modal').classList.remove('on');document.body.style.overflow='';if(last)last.focus()}
 $('#mx').onclick=closeM;$('#modal').onclick=e=>{if(e.target.id==='modal')closeM()};document.addEventListener('keydown',e=>{if(e.key==='Escape')closeM()});
