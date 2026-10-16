@@ -150,7 +150,7 @@ input[type=search]{flex:1;min-width:220px;background:var(--paper);color:var(--in
 .mb .tips{background:#fff;border:3px dashed var(--red);padding:10px 12px;font-size:.93rem}
 .lgw{position:relative;z-index:1;display:grid;place-items:center;width:100%;height:100%}
 .lgw svg{width:50%;height:auto}
-.lgi{display:none;width:100%;height:100%;max-height:none;object-fit:contain;background:#fff;padding:0;position:relative;z-index:2}
+.lgi{display:none;width:100%;height:100%;max-height:none;object-fit:contain;background:transparent;padding:0;position:relative;z-index:2}
 .lgw.has{position:absolute;inset:0;width:100%;height:100%;display:block}.lgw.has .lgi{display:block}.lgw.has svg{display:none}
 .bp .lgw svg,.box .bp .lgw svg{width:50%}
 .lgw.gif .lgi{object-fit:contain}
@@ -306,8 +306,10 @@ function badge(b){const n=b.n;let g;
  else if(n==='Burberry')g='<rect x="10" y="10" width="80" height="80" fill="none" stroke="currentColor" stroke-width="4"/><g stroke="currentColor"><path d="M30 10v80M50 10v80M70 10v80M10 30h80M10 50h80M10 70h80" stroke-width="2.5" opacity=".7"/><path d="M40 10v80M10 40h80" stroke-width="6" opacity=".9"/></g>';
  else{const w=n.replace(/&/g,'').split(/[\s.]+/).filter(Boolean),m=(w[0][0]+(w[1]?w[1][0]:w[0][1]||'')).toUpperCase();g=`<path d="M50 6L90 20V50Q90 80 50 95Q10 80 10 50V20Z" fill="none" stroke="currentColor" stroke-width="5"/><text x="50" y="62" text-anchor="middle" font-family="Anton,Impact" font-size="34" fill="currentColor">${esc(m)}</text>`}
  return `<svg viewBox="0 0 100 100" role="img" aria-label="Ilustrasi badge ${esc(n)}">${g}</svg>`}
+// warna sisi logo mengikuti warna tepi gambar, jadi tidak ada bar putih dan logo tidak terpotong
+function fitBg(i){const w=i.parentNode;try{const c=document.createElement('canvas');c.width=c.height=16;const x=c.getContext('2d');x.drawImage(i,0,0,16,16);const d=x.getImageData(0,0,16,16).data;let r=0,g=0,b=0,a=0,n=0;for(let y=0;y<16;y++)for(let k=0;k<16;k++){if(y&&y<15&&k&&k<15)continue;const o=(y*16+k)*4;r+=d[o];g+=d[o+1];b+=d[o+2];a+=d[o+3];n++}a/=n;w.style.background=a<200?'#fff':'rgb('+Math.round(r/n)+','+Math.round(g/n)+','+Math.round(b/n)+')'}catch(e){w.style.background='#fff'}}
 const slug=n=>n.toLowerCase().replace(/&/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
-function bimg(b){const f=slug(b.n);return `<span class="lgw">${badge(b)}<img class="lgi" src="logos/${f}.gif" data-f="${f}" data-i="0" alt="Logo ${esc(b.n)}" onload="var p=this.parentNode;p.classList.add('has');if(this.src.slice(-4)=='.gif')p.classList.add('gif')" onerror="var e=['svg','png','jpg'],i=+this.dataset.i;if(i<e.length){this.dataset.i=i+1;this.src='logos/'+this.dataset.f+'.'+e[i]}else this.remove()"></span>`}
+function bimg(b){const f=slug(b.n);return `<span class="lgw">${badge(b)}<img class="lgi" src="logos/${f}.gif" data-f="${f}" data-i="0" alt="Logo ${esc(b.n)}" onload="var p=this.parentNode;p.classList.add('has');fitBg(this);if(this.src.slice(-4)=='.gif')p.classList.add('gif')" onerror="var e=['svg','png','jpg'],i=+this.dataset.i;if(i<e.length){this.dataset.i=i+1;this.src='logos/'+this.dataset.f+'.'+e[i]}else this.remove()"></span>`}
 const CC={"Italian Sportswear":"c1","Designer Outerwear":"c2","Classic Trainers":"c3","UK Modern":"c4"};
 // anatomi
 const FITS=[["Goggle Jacket","C.P. Company","Jaket dengan lensa goggle di tudung, terinspirasi helm balap Mille Miglia. Simbol paling dikenal dari scene ini.","pic:jacket"],["Compass Badge","Stone Island","Patch kompas di lengan, dilepas lewat kancing. Penanda kualitas bahan dan eksperimen pewarnaan.","badge:Stone Island"],["Suede Trainers","Adidas SPZL","Gazelle, Samba, Handball Spezial. Suede, sol gum, siluet ramping, dan titik pusat outfit.","pic:sneaker"],["Trench Coat","Burberry / Aquascutum","Mantel panjang untuk gaya smart casual tribun 90-an, kini dipakai ringan di atas polo.","pic:trench"],["Bucket Hat","Gaya Britpop","Topi bucket jadi penutup kepala khas akhir 80-an sampai 90-an, ringan dan cocok di cuaca panas.","pic:hat"],["Syal Klub","Atribut tribun","Syal tetap simbol identitas suporter, sering dipakai di bahu atau diikat di tas.","pic:scarf"]];
