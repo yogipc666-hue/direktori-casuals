@@ -285,7 +285,7 @@ const IMG={
  sneaker3:{u:U('1556906781-9a412961c28c'),c:'Detail trainer'},
  rack:{u:U('1523381210434-271e8be1f52b'),c:'Rak clobber'},
  trench:{u:'',c:'Trench coat'},hat:{u:'',c:'Bucket hat'},scarf:{u:'',c:'Syal klub'},
- pub:{u:'',c:'Pub sebelum pertandingan'},fabric:{u:'',c:'Detail kain: nylon, cotton, gore-tex'},vintage:{u:'',c:'No one likes us, we dont care'}
+ pub:{u:'',c:'Pub sebelum pertandingan'},fabric:{u:'',c:'Detail kain: nylon, cotton, gore-tex'},vintage:{u:'',c:'Suporter 80-an, away day'}
 };
 const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function pic(k,cls){const m=IMG[k];return `<figure class="ph ${cls||''}"><img src="img/${k}.jpg" data-alt="${m.u||''}" alt="${esc(m.c)}" loading="lazy" onerror="if(this.dataset.alt&&!this.dataset.t){this.dataset.t=1;this.src=this.dataset.alt}else this.parentNode.classList.add('fail')"><span class="fb">${esc(m.c)}</span><figcaption>${esc(m.c)}</figcaption></figure>`}
