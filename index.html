@@ -38,6 +38,11 @@ p{margin-bottom:14px;max-width:68ch}
 .links{display:none;gap:2px}
 .links a{font:400 1rem var(--an);text-transform:uppercase;letter-spacing:.1em;text-decoration:none;padding:8px 10px;color:#ddd}
 .links a:hover{background:var(--paper);color:var(--ink)}
+.links a.on{background:var(--red);color:#fff}
+.mm a.on{background:var(--red);color:#fff}
+#prog{position:absolute;left:0;bottom:-4px;height:4px;width:0;background:#fff;pointer-events:none;transition:width .1s linear}
+#chap{position:fixed;left:12px;bottom:14px;z-index:45;background:var(--ink);color:#fff;border:2px solid var(--red);padding:6px 11px;font:.8rem var(--tw);letter-spacing:.04em;box-shadow:3px 3px 0 var(--red);opacity:0;transform:translateY(8px);transition:opacity .2s,transform .2s;pointer-events:none;max-width:calc(100vw - 24px)}
+#chap.show{opacity:1;transform:none}
 .bg{background:none;border:2px solid var(--paper);padding:6px 11px;font:400 1rem var(--an);text-transform:uppercase}
 .mm{display:none;background:var(--ink2);border-top:1px solid #333}.mm.on{display:block}
 .mm a{display:block;padding:14px 20px;border-bottom:1px solid #333;font:400 1.2rem var(--an);text-transform:uppercase;text-decoration:none;letter-spacing:.1em}
@@ -112,7 +117,7 @@ input[type=search]{flex:1;min-width:220px;background:var(--paper);color:var(--in
 .chips,.az{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
 .chip,.az button{background:var(--paper);color:var(--ink);border:2px solid var(--ink);padding:7px 13px;font:400 .95rem var(--an);letter-spacing:.1em;text-transform:uppercase}
 .az button{padding:4px 9px;font-size:.85rem}
-.chip.on,.az button.on{background:var(--red);color:#fff}.az button:disabled{opacity:.3;cursor:default}
+.chip.on,.az button.on{background:var(--red);color:#fff}.az button:disabled{opacity:1;background:#e2e2e2;color:#999;border-color:#c4c4c4;cursor:not-allowed}
 .brands{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));margin-top:16px}
 .bc{background:var(--paper);color:var(--ink);border:3px solid var(--ink);text-align:left;padding:0 0 14px;display:flex;flex-direction:column;box-shadow:6px 6px 0 var(--ink)}
 .bc:hover{transform:translate(-2px,-2px) rotate(-.6deg);box-shadow:8px 8px 0 var(--red)}
@@ -131,6 +136,8 @@ input[type=search]{flex:1;min-width:220px;background:var(--paper);color:var(--in
 .gal .w2{grid-column:span 2}.gal .h2{grid-row:span 2}
 @media(min-width:800px){.gal{grid-template-columns:repeat(4,1fr);grid-auto-rows:230px}}
 /* store */
+.sg{font:400 1.7rem/1.1 var(--an);text-transform:uppercase;letter-spacing:.02em;margin:34px 0 4px;color:var(--ink);display:flex;align-items:center;gap:10px}.sg:before{content:"";width:14px;height:14px;background:var(--red);flex:none}
+.sgd{font-size:.9rem;color:#555;margin:0 0 16px}
 .stores{display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
 .st{background:var(--paper);color:var(--ink);border:3px solid var(--ink);padding:18px;position:relative;box-shadow:6px 6px 0 var(--ink);text-decoration:none;display:flex;flex-direction:column}
 .st:hover{box-shadow:6px 6px 0 var(--red)}
@@ -174,7 +181,7 @@ footer{background:#000;border-top:6px solid var(--red);padding:44px 0 0;font:.88
 </head>
 <body>
 <div class="ticker" aria-hidden="true"><div class="tk" id="tk"></div></div>
-<header class="nav"><div class="wrap nb">
+<header class="nav"><div id="prog"></div><div class="wrap nb">
 <a class="logo" href="#top"><b>Direktori Casuals</b><small>Terrace Culture &amp; Football Subculture Guide</small></a>
 <nav class="links" aria-label="Menu utama"><a href="#apa">Sejarah</a><a href="#fit">Matchday Fit</a><a href="#beda">Beda Kubu</a><a href="#gloss">Glosarium</a><a href="#brand">Brand A–Z</a><a href="#galeri">Galeri</a><a href="#store">Store ID</a></nav>
 <button class="bg" id="bg" aria-expanded="false">Menu</button>
@@ -253,11 +260,12 @@ footer{background:#000;border-top:6px solid var(--red);padding:44px 0 0;font:.88
 <section class="paper pad" id="store"><div class="wrap">
 <span class="kick">Bab 7 — Belanja</span><h2 class="zh">Terrace Store &amp; Stockist ID</h2>
 <p>Kanal yang umum dipakai dari Indonesia untuk apparel dan trainers original. Ini panduan umum, bukan endorsement; cek stok, harga, dan kebijakan toko sendiri.</p>
-<div class="stores" id="stores"></div>
+<div id="stores"></div>
 <div class="chk"><h3>Cek keaslian sebelum bayar</h3><ol>
 <li>Minta foto label dalam, tag, badge, dan kotak.</li><li>Cocokkan kode produk dengan situs resmi brand.</li><li>Periksa jahitan, zipper, dan kancing.</li><li>Harga jauh di bawah pasar hampir selalu berarti masalah.</li><li>Pakai pembayaran terlindungi (rekber / escrow marketplace).</li><li>Beli luar negeri: hitung ongkir dan bea masuk dulu.</li></ol></div>
 </div></section>
 
+<div id="chap" aria-live="polite"></div>
 <footer><div class="wrap">
 <div class="ft">
 <div><h3>Direktori Casuals</h3><p class="tag">Terrace Culture &amp; Football Subculture Guide</p><p>Fanzine edukasi independen tentang budaya terrace, fashion tribun, dan sejarah subkultur casuals. Dibuat untuk project sekolah.</p></div>
@@ -343,9 +351,10 @@ $('#gq').oninput=gl;
 const CATS=["Semua","Italian Sportswear","Designer Outerwear","Classic Trainers","UK Modern"];let cat="Semua",letter="",query="";
 BRANDS.sort((a,b)=>a.n.localeCompare(b.n));const letters=BRANDS.map(b=>b.n[0].toUpperCase());
 function render(){
+ const avail=BRANDS.filter(b=>cat==="Semua"||b.c===cat).map(b=>b.n[0].toUpperCase());if(letter&&!avail.includes(letter))letter="";
  $('#cats').innerHTML=CATS.map(c=>`<button class="chip ${c===cat?'on':''}" data-c="${c}">${c}</button>`).join('');
  $('#cats').querySelectorAll('button').forEach(b=>b.onclick=()=>{cat=b.dataset.c;render()});
- $('#az').innerHTML=`<button class="${letter?'':'on'}" data-l="">Semua</button>`+[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].map(l=>`<button class="${l===letter?'on':''}" data-l="${l}" ${letters.includes(l)?'':'disabled'}>${l}</button>`).join('');
+ $('#az').innerHTML=`<button class="${letter?'':'on'}" data-l="">Semua</button>`+[..."ABCDEFGHIJKLMNOPQRSTUVWXYZ"].map(l=>`<button class="${l===letter?'on':''}" data-l="${l}" ${avail.includes(l)?'':'disabled'}>${l}</button>`).join('');
  $('#az').querySelectorAll('button:not(:disabled)').forEach(b=>b.onclick=()=>{letter=b.dataset.l;render()});
  const q=query.toLowerCase(),list=BRANDS.filter(b=>(cat==="Semua"||b.c===cat)&&(!letter||b.n[0].toUpperCase()===letter)&&(!q||(b.n+b.h+b.i.join(' ')+b.c+b.o).toLowerCase().includes(q)));
  $('#brands').innerHTML=list.map(b=>`<button class="bc" data-n="${esc(b.n)}"><span class="bp ${CC[b.c]}">${bimg(b)}</span><span class="tg">${esc(b.c)}</span><h3>${esc(b.n)}</h3><span class="mt">${esc(b.o)} · sejak ${esc(b.y)}</span><span class="pr">mulai ${esc(b.p[0][1])}</span></button>`).join('');
@@ -371,8 +380,16 @@ const GAL=[["crowd","w2 h2 duo cap"],["fabric","cap"],["sneaker2","cap col"],["p
 $('#gal').innerHTML=GAL.map(g=>{const h=pic(g[0],g[1]);return h}).join('');
 // store
 const STORES=[["Adidas Indonesia","Toko resmi","Sumber utama Gazelle, Samba, dan rilis Originals. Pantau restock resmi untuk model SPZL.","https://www.adidas.co.id"],["Zalora","Marketplace","Polo Fred Perry, Lacoste, Lyle & Scott. Pilih penjual berlabel resmi.","https://www.zalora.co.id"],["Tokopedia Official Store","Marketplace","Cari badge Official Store untuk barang bernilai tinggi.","https://www.tokopedia.com"],["Shopee Mall","Marketplace","Gunakan toko berlabel Mall dan baca ulasan foto.","https://shopee.co.id"],["Foot Locker","Toko trainer","Pilihan trainer klasik dengan jaminan keaslian toko.","https://footlocker.id"],["Sports Station","Toko trainer","Sneaker dan sportswear dari brand heritage.","https://sportsstation.id"],["END. Clothing","Internasional","Stone Island, C.P. Company, dan brand desainer. Hitung ongkir dan bea masuk.","https://www.endclothing.com"],["Farfetch / SSENSE","Internasional","Butik desainer dengan kebijakan pengembalian jelas.","https://www.farfetch.com"],["Fred Perry","Toko brand","Toko online resmi untuk polo, Harrington, dan klasik UK Modern. Cek ongkir dan opsi kirim ke Indonesia.","https://www.fredperry.com"],["Weekend Offender","Toko brand","Toko online resmi brand dari Liverpool.","https://www.weekendoffender.com"],["Grailed / Vestiaire","Preloved","Barang arsip dan bekas. Minta foto label dan kode produk.","https://www.grailed.com"],["Butik lokal","Offline","Tanya langsung apakah mereka stockist resmi sebelum membeli. Isi nama butik terpercaya di kotamu.",""]];
-$('#stores').innerHTML=STORES.map(s=>{const i=`<span class="ty">${esc(s[1])}</span><h3>${esc(s[0])}</h3><p>${esc(s[2])}</p>${s[3]?'<span class="go">Kunjungi →</span>':''}`;return s[3]?`<a class="st" href="${s[3]}" target="_blank" rel="noopener noreferrer">${i}</a>`:`<div class="st">${i}</div>`}).join('');
+const SG=[["brand","Toko resmi brand","Langsung dari brand, paling aman soal keaslian.",["Toko resmi","Toko brand"]],["retailer","Retailer","Toko multi-brand yang menjual produk original dari banyak merek.",["Toko trainer","Internasional"]],["market","Marketplace &amp; preloved","Banyak penjual dalam satu platform. Pilih toko berlabel resmi dan baca ulasan.",["Marketplace","Preloved"]],["off","Offline &amp; lokal","Datang langsung, pegang barangnya, tanya penjual.",["Offline"]]];
+$('#stores').innerHTML=SG.map(g=>{const items=STORES.filter(s=>g[3].includes(s[1]));if(!items.length)return'';return `<h3 class="sg">${g[1]}</h3><p class="sgd">${g[2]}</p><div class="stores">`+items.map(s=>{const i=`<span class="ty">${esc(s[1])}</span><h3>${esc(s[0])}</h3><p>${esc(s[2])}</p>${s[3]?'<span class="go">Kunjungi →</span>':''}`;return s[3]?`<a class="st" href="${s[3]}" target="_blank" rel="noopener noreferrer">${i}</a>`:`<div class="st">${i}</div>`}).join('')+`</div>`}).join('');
 fill();render();gl();
+
+// indikator bab: progres scroll, menu aktif, dan label bab
+(function(){const ids=['apa','fit','beda','gloss','brand','galeri','store'],secs=ids.map(i=>document.getElementById(i)).filter(Boolean),prog=document.getElementById('prog'),chap=document.getElementById('chap'),ft=document.querySelector('footer');
+function upd(){const h=document.documentElement,max=h.scrollHeight-h.clientHeight;prog.style.width=(max>0?Math.min(100,h.scrollTop/max*100):0)+'%';let cur=null;secs.forEach(x=>{const r=x.getBoundingClientRect();if(r.top<=120&&r.bottom>120)cur=x});if(ft&&ft.getBoundingClientRect().top<innerHeight*.6)cur=null;
+document.querySelectorAll('.links a,.mm a').forEach(a=>a.classList.toggle('on',!!cur&&a.getAttribute('href')==='#'+cur.id));
+if(cur){const k=cur.querySelector('.kick'),n=document.querySelector('.links a[href="#'+cur.id+'"]');chap.textContent=k?k.textContent:(n?n.textContent:'');chap.classList.add('show')}else chap.classList.remove('show')}
+addEventListener('scroll',upd,{passive:true});addEventListener('resize',upd);upd()})();
 </script>
 </body>
 </html>
